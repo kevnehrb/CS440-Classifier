@@ -1,4 +1,3 @@
-
 # dataClassifier.py
 # -----------------
 # Licensing Information: Please do not distribute or publish solutions to this
@@ -110,10 +109,10 @@ def enhancedFeatureExtractorFace(datum):
     for x in range(FACE_DATUM_WIDTH/12):
         for y in range(FACE_DATUM_HEIGHT/12):
             if datum.getPixel((i+1)*x, (i+1)*y) > 0 and check == 0:
-                features[(29,i)] = 1
+                features[(61,i)] = 1
                 check = 1
             elif check == 0:
-                features[(29,i)] = 0
+                features[(61,i)] = 0
     check = 0
 
   return features
@@ -144,9 +143,9 @@ def analysis(classifier, guesses, testLabels, testData, rawTestData, printImage)
   for i in range(len(guesses)):
       prediction = guesses[i]
       truth = testLabels[i]
-      if (prediction != truth):
+      if (prediction == truth):
           print "==================================="
-          print "Mistake on example %d" % i 
+          print "Correct on example %d" % i 
           print "Predicted %d; truth is %d" % (prediction, truth)
           print "Image: "
           print rawTestData[i]
