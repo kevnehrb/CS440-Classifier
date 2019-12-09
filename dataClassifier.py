@@ -1,3 +1,4 @@
+
 # dataClassifier.py
 # -----------------
 # Licensing Information: Please do not distribute or publish solutions to this
@@ -102,6 +103,19 @@ def enhancedFeatureExtractorFace(datum):
   It is your choice to modify this.
   """
   features =  basicFeatureExtractorFace(datum)
+
+  global check
+ 
+  for i in range(12):
+    for x in range(FACE_DATUM_WIDTH/12):
+        for y in range(FACE_DATUM_HEIGHT/12):
+            if datum.getPixel((i+1)*x, (i+1)*y) > 0 and check == 0:
+                features[(29,i)] = 1
+                check = 1
+            elif check == 0:
+                features[(29,i)] = 0
+    check = 0
+
   return features
 
 def analysis(classifier, guesses, testLabels, testData, rawTestData, printImage):
