@@ -49,19 +49,14 @@ class PerceptronClassifier:
         print "Starting iteration ", iteration, "..."
         for i in range(len(trainingData)):
             "*** YOUR CODE HERE ***"
-           
-            y = None #choice
-            fx = None #highest score
+            datum = trainingData[i] # counter from features to values for the training data
             
-            for j in self.legalLabels:
-                currFx = self.weights[j] * trainingData[i]
-                if fx is None or fx < currFx:
-                    fx = currFx # set currFx as highest fx value since its the base case
-                    y = j
-            if self.classify([trainingData[i]])[0] != trainingLabels[i]:
-                self.weights[trainingLabels[i]] = self.weights[trainingLabels[i]] + trainingData[i]
-                self.weights[self.classify([trainingData[i]])[0]] = self.weights[self.classify([trainingData[i]])[0]] - trainingData[i]
-            #util.raiseNotDefined()
+            # using the classify function, we are able to compare the true label to the highest scored label, and alter the weights if it is not correct
+            if self.classify([datum])[0] != trainingLabels[i]:
+                self.weights[self.classify([datum])[0]] = self.weights[self.classify([datum])[0]] - datum # classify method should've scored lower
+                self.weights[trainingLabels[i]] = self.weights[trainingLabels[i]] + datum # label should have been scored higher     
+
+        #util.raiseNotDefined()
     
   def classify(self, data ):
     """
@@ -86,13 +81,6 @@ class PerceptronClassifier:
     featuresWeights = []
 
     "*** YOUR CODE HERE ***"
-        
-    allWeights = self.weights[label]
-
-    for i in range(100):
-        maxWeightIndex = allWeights.argMax()
-        featuresWeights.append(maxWeightIndex)
-        allWeights[maxWeightIndex] = -1000000
 
     util.raiseNotDefined()
 
